@@ -13,6 +13,7 @@ dialog --no-cancel --inputbox "Enter a name for your computer." \
 # Verify boot (UEFI or BIOS)
 uefi=0
 ls /sys/firmware/efi/efivars 2> /dev/null && uefi=1
+# Choose hard drive
 devices_list=($(lsblk -d | awk '{print "/dev/" $1 " " $4 " on"}' \
     | grep -E 'sd|hd|vd|nvme|mmcblk'))
 dialog --title "Choose your hard drive" --no-cancel --radiolist \
@@ -22,6 +23,7 @@ dialog --title "Choose your hard drive" --no-cancel --radiolist \
     15 60 4 "${devices_list[@]}" 2> hd
 
 hd=$(cat hd) && rm hd
+# Set partitions sizes
 default_size="8"
 dialog --no-cancel --inputbox \
     "You need three partitions: Boot, Root and Swap \n\
@@ -34,6 +36,7 @@ size=$(cat swap_size) && rm swap_size
 
 [[ $size =~ ^[0-9]+$ ]] || size=$default_size
 
+# Wipe hard drive
 dialog --no-cancel \
     --title "!!! DELETE EVERYTHING !!!" \
     --menu "Choose the way you'll wipe your hard disk ($hd)" \
@@ -60,6 +63,7 @@ function eraseDisk() {
 
 eraseDisk "$hderaser"
 
+# Create partitions
 boot_partition_type=1
 [[ "$uefi" == 0 ]] && boot_partition_type=4
 
@@ -118,6 +122,7 @@ rm /mnt/var_uefi
 rm /mnt/var_hd
 rm /mnt/install_chroot.sh
 
+# End of installation
 dialog --title "To reboot or not to reboot?" --yesno \
     "Congrats! The install is done! \n\n\
     Do you want to reboot your computer?" 20 60
