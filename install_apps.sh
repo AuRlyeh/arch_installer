@@ -27,7 +27,7 @@ apps=("essential" "Essentials" on
 
 dialog --checklist \
     "You can now choose what group of application you want to install. \n\n\
-    You can select an option with SPACE and valid your choices with ENTER." \
+You can select an option with SPACE and valid your choices with ENTER." \
     0 0 0 \
     "${apps[@]}" 2> app_choices
 
@@ -48,7 +48,7 @@ rm -f /tmp/aur_queue
 
 dialog --title "Let's go!" --msgbox \
     "The system will now install everything you need.\n\n\
-    It will take some time.\n\n " \
+It will take some time.\n\n " \
     13 60
 
 c=0
@@ -78,6 +78,8 @@ echo "%wheel ALL=(All) ALL" >> /etc/sudoers
 
 # User installer script
 curl https://raw.githubusercontent.com/AuRlyeh\
-    /arch_installer/master/install_user.sh > /tmp/install_user.sh;
+/arch_installer/master/install_user.sh > /tmp/install_user.sh;
+curl https://raw.githubusercontent.com/AuRlyeh\
+/arch_installer/master/install_user.sh > /tmp/install_user.sh;
 
 sudo -u "$name" sh /tmp/install_user.sh
