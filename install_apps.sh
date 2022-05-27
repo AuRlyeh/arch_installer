@@ -74,7 +74,7 @@ echo "$packages" | while read -r line; do
 done
 
 # Permission
-echo "%wheel ALL=(All:ALL) ALL" > /etc/sudoers.d/sudoers2
+sed -i 's/^# \(%wheel ALL=(ALL:ALL) ALL\)$/\1/' /etc/sudoers
 
 # User installer script
 curl https://raw.githubusercontent.com/AuRlyeh\
