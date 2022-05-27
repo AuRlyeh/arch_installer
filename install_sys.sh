@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Never run pacman -Sy on your system!
-pacman -Sy dialog
+pacman -Sy dialog --noconfirm
 timedatectl set-ntp true
 dialog --defaultno --title "Are you sure?" --yesno \
     "This is my personnal arch linux install. \n\n\

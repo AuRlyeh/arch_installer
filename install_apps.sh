@@ -64,7 +64,7 @@ echo "$packages" | while read -r line; do
         || echo "$line" >> /tmp/arch_install_failed
 
     if [ "$line" = "zsh" ]; then
-        # Set Esh as default terminal for our user
+        # Set Zsh as default terminal for our user
         chsh -s "$(which zsh)" "$name"
     fi
 
@@ -74,7 +74,7 @@ echo "$packages" | while read -r line; do
 done
 
 # Permission
-echo "%wheel ALL=(All) ALL" >> /etc/sudoers
+echo "%wheel ALL=(All:ALL) ALL" >> /etc/sudoers
 
 # User installer script
 curl https://raw.githubusercontent.com/AuRlyeh\
