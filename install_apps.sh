@@ -76,6 +76,9 @@ done
 # Permission
 sed -i 's/^# \(%wheel ALL=(ALL:ALL) ALL\)$/\1/' /etc/sudoers
 
+# Keyboard layout
+localectl --no-convert set-x11-keymap fr
+
 # User installer script
 curl https://raw.githubusercontent.com/AuRlyeh\
 /arch_installer/master/install_user.sh > /tmp/install_user.sh;

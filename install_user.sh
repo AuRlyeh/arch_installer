@@ -4,9 +4,6 @@
 mkdir -p "/home/$(whoami)/Documents"
 mkdir -p "/home/$(whoami)/Downloads"
 
-# Keyboard layout
-localectl --no-convert set-x11-keymap fr
-
 # Install packages from the AUR
 aur_install() {
     curl -O "https://aur.archlinux.org/cgit/aur.git/snapshot/$1.tar.gz" \
